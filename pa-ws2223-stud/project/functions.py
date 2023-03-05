@@ -2,10 +2,17 @@ from typing import Union
 import numpy as np
 import pandas as pd
 
-
+# generates paths, assignes them to "pfade" array and returns the "pfade" array.
 def gen_path_for_multi_speeds(
     run_id: int, index: list[str], pump_speeds: list[float]
 ) -> list[str]:
+    
+    pfade = []
+    for i in index :
+        for j in pump_speeds :
+            path = '/run' + str(run_id) + '/Kennlinie_ESP_c_' + j + '_' + i
+            pfade.append(path)
+    return pfade
     pass
 
 
