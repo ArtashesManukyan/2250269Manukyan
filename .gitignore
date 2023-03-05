@@ -2,3 +2,4 @@ Readme.md
 project/.DS_Store
 project/__init__.py
 project/data/
+.gitignore
