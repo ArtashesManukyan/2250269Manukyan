@@ -15,10 +15,16 @@ def gen_path_for_multi_speeds(
     return pfade
     pass
 
-
+# opens hdf5 file as store, gets attributes by key in "att_key", decodes it in "utf-8" format and returnes metadata (if there are no any attributes it prints error message).
 def read_dataframe_metadata(
     file: str, path: str, att_key: str
 ) -> Union[np.float64, np.int32, np.bytes_, None]:
+    
+    with pd.HDFStore(file, "r") as store:      
+        try: 
+            return store.get_storer(path).attrs[att_key].decode('utf-8')
+        except KeyError: 
+            print("Keine Attributes gefunden")
     pass
 
 
