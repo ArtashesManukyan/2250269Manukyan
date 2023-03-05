@@ -1,6 +1,7 @@
 from typing import Union
 import numpy as np
 import pandas as pd
+import h5py
 
 # generates paths, assignes them to "pfade" array and returns the "pfade" array.
 def gen_path_for_multi_speeds(
@@ -27,10 +28,15 @@ def read_dataframe_metadata(
             print("Keine Attributes gefunden")
     pass
 
-
+#opens hdf5 file, checks if value of "key" is equal to passed "att_key" and if it is, returns attributes decoded in "utf-8" format.
 def read_group_metadata(
     file: str, path: str, att_key: str
 ) -> Union[np.float64, np.int32, np.bytes_, None]:
+    
+    hdf = h5py.file(file,'r')[path]
+    for key in hdf.attrs.keys():
+        if key == att_key:
+            return hdf.attrs[key].decode('utf-8')
     pass
 
 
